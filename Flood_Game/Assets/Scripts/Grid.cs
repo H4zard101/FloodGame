@@ -24,7 +24,7 @@ public class Grid : MonoBehaviour
         {
             for (int z = 0; z < height; z++)
             {
-                Instantiate(tilePrefab, new Vector3(x , 0, z), Quaternion.identity);
+                Instantiate(tilePrefab, new Vector3(x + 3 , 0, z), Quaternion.identity);
             }
         }
 
@@ -45,7 +45,7 @@ public class Grid : MonoBehaviour
     }
     void SetCamera()
     {
-        camera.transform.position = new Vector3(width / 2 - 0.5F, height / 2 - 0.5F, -5);
+        camera.transform.position = new Vector3(width / 2 + 2, height / 2 + 1, -5);
         camera.transform.rotation = Quaternion.Euler(45, 0, 0);
     }
 }
