@@ -21,7 +21,11 @@ public class BuildSystem : MonoBehaviour
 
     public bool gridOn;
 
+    public bool canPlace;
+
     public float rotateAmount;
+
+    public bool outOfMoney;
 
     [SerializeField] private Toggle gridToggle;
     #endregion
@@ -30,6 +34,8 @@ public class BuildSystem : MonoBehaviour
     private void Start()
     {
         playerCamera = FindObjectOfType<Camera>();
+        canPlace = true;
+        outOfMoney = false;
     }
 
     // INPUT HANDELING
@@ -45,9 +51,17 @@ public class BuildSystem : MonoBehaviour
             {
                 objectSelected.transform.position = objectPos;
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && canPlace)
             {                          
                 objectSelected = null;
+                SetCreditAmount.creditAmount -= BuildingCostToPlace.CostToPlace;
+
+                if(SetCreditAmount.creditAmount <= 0)
+                {
+                    canPlace = false;
+                    outOfMoney = true;
+                }
+                
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -73,7 +87,24 @@ public class BuildSystem : MonoBehaviour
     // PLACE THE OBJECT
     public void placeObjectInScene(int index)
     {
-        objectSelected = Instantiate(buildObjects[index],objectPos,Quaternion.identity);
+        objectSelected = Instantiate(buildObjects[index], objectPos, Quaternion.identity);
+
+        if (index == 0)
+        {
+            BuildingCostToPlace.CostToPlace = 5;
+        }
+        else if(index == 1)
+        {
+            BuildingCostToPlace.CostToPlace = 10;
+        }
+        else if (index == 2)
+        {
+            BuildingCostToPlace.CostToPlace = 25;
+        }
+        else if (index == 3)
+        {
+            BuildingCostToPlace.CostToPlace = 10;
+        }
     }
     public void RotateObject()
     {
