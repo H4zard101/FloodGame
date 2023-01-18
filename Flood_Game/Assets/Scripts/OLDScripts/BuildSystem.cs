@@ -78,7 +78,7 @@ public class BuildSystem : MonoBehaviour
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, 10000, layerMask))
+        if(Physics.Raycast(ray, out hit, 1000000, layerMask))
         {
             objectPos = hit.point;
         }
