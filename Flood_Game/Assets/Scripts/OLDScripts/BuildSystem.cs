@@ -27,7 +27,7 @@ public class BuildSystem : MonoBehaviour
 
     public bool outOfMoney;
 
-    [SerializeField] private Toggle gridToggle;
+    //[SerializeField] private Toggle gridToggle;
     #endregion
 
     // ASSIGN THE ONLY CAMERA IN THE SCENE
@@ -36,6 +36,7 @@ public class BuildSystem : MonoBehaviour
         playerCamera = FindObjectOfType<Camera>();
         canPlace = true;
         outOfMoney = false;
+        gridOn = true;
     }
 
     // INPUT HANDELING
@@ -113,14 +114,14 @@ public class BuildSystem : MonoBehaviour
 
     public void ToggleGrid()
     {
-        if(gridToggle.isOn)
-        {
-            gridOn = true;
-        }
-        else if(!gridToggle.isOn)
-        {
-            gridOn = false;
-        }
+        //if(gridToggle.isOn)
+        //{
+        //    gridOn = true;
+        //}
+        //else if(!gridToggle.isOn)
+        //{
+        //    gridOn = false;
+        //}
     }
     float RoundToNearestGrid(float pos)
     {
