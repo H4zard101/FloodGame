@@ -57,16 +57,18 @@ public class BuildSystem : MonoBehaviour
                 objectSelected = null;
                 SetCreditAmount.creditAmount -= BuildingCostToPlace.CostToPlace;
 
-                if(SetCreditAmount.creditAmount <= 0)
-                {
-                    canPlace = false;
-                    outOfMoney = true;
-                }
                 
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 RotateObject();
+            }
+
+            if (SetCreditAmount.creditAmount < BuildingCostToPlace.CostToPlace)
+            {
+                Debug.Log("out of money");
+                canPlace = false;
+                outOfMoney = true;
             }
         }
 
@@ -112,17 +114,17 @@ public class BuildSystem : MonoBehaviour
         objectSelected.transform.Rotate(Vector3.up, rotateAmount);
     }
 
-    public void ToggleGrid()
-    {
-        //if(gridToggle.isOn)
-        //{
-        //    gridOn = true;
-        //}
-        //else if(!gridToggle.isOn)
-        //{
-        //    gridOn = false;
-        //}
-    }
+    //public void ToggleGrid()
+    //{
+    //    //if(gridToggle.isOn)
+    //    //{
+    //    //    gridOn = true;
+    //    //}
+    //    //else if(!gridToggle.isOn)
+    //    //{
+    //    //    gridOn = false;
+    //    //}
+    //}
     float RoundToNearestGrid(float pos)
     {
         float xDiff = pos % gridSize;

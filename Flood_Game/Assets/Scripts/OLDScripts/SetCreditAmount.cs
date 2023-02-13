@@ -6,7 +6,7 @@ using TMPro;
 
 public class SetCreditAmount : MonoBehaviour
 {
-    public static float creditAmount = 200.0f;
+    public static float creditAmount = 50.0f;
 
     public TextMeshProUGUI creditText;
 
