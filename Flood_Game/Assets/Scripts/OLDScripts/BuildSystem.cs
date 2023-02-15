@@ -27,7 +27,6 @@ public class BuildSystem : MonoBehaviour
 
     public bool outOfMoney;
 
-    //[SerializeField] private Toggle gridToggle;
     #endregion
 
     // ASSIGN THE ONLY CAMERA IN THE SCENE
@@ -52,23 +51,24 @@ public class BuildSystem : MonoBehaviour
             {
                 objectSelected.transform.position = objectPos;
             }
-            if (Input.GetMouseButtonDown(0) && canPlace)
-            {                          
-                objectSelected = null;
-                SetCreditAmount.creditAmount -= BuildingCostToPlace.CostToPlace;
 
-                
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (SetCreditAmount.CreditAmount < BuildingCostToPlace.CostToPlace)
+                {
+                    canPlace = false;
+                    outOfMoney = true;
+                }
+                if (canPlace)
+                {
+                    objectSelected = null;
+                    SetCreditAmount.CreditAmount -= BuildingCostToPlace.CostToPlace;
+                    Debug.Log(SetCreditAmount.CreditAmount);
+                }
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 RotateObject();
-            }
-
-            if (SetCreditAmount.creditAmount < BuildingCostToPlace.CostToPlace)
-            {
-                Debug.Log("out of money");
-                canPlace = false;
-                outOfMoney = true;
             }
         }
 
@@ -113,18 +113,6 @@ public class BuildSystem : MonoBehaviour
     {
         objectSelected.transform.Rotate(Vector3.up, rotateAmount);
     }
-
-    //public void ToggleGrid()
-    //{
-    //    //if(gridToggle.isOn)
-    //    //{
-    //    //    gridOn = true;
-    //    //}
-    //    //else if(!gridToggle.isOn)
-    //    //{
-    //    //    gridOn = false;
-    //    //}
-    //}
     float RoundToNearestGrid(float pos)
     {
         float xDiff = pos % gridSize;

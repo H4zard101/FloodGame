@@ -6,13 +6,35 @@ using TMPro;
 
 public class SetCreditAmount : MonoBehaviour
 {
-    public static float creditAmount = 50.0f;
+    public static float CreditAmount = 50.0f;
+    //public static float newCreditAmount;
+    public float creditGain = 5;
+
+    public float _Time = 3;
+    public float maxTime = 3;
 
     public TextMeshProUGUI creditText;
 
 
+    public void Start()
+    {
+        creditText.text = "Credits : " + CreditAmount;
+    }
+
     public void Update()
     {
-        creditText.text = "Credits : " + creditAmount;
+        if (_Time > 0)
+        {
+            _Time -= Time.deltaTime;
+
+        }
+
+        else
+        {
+            _Time = maxTime;
+            CreditAmount = CreditAmount + creditGain;
+
+        }
+        creditText.text = "Credits : " + CreditAmount;
     }
 }
