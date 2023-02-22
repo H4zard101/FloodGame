@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,4 +49,45 @@ public class PanZoom : MonoBehaviour
     //{
     //    Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
     //}
+}*/
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PanZoom : MonoBehaviour
+{
+    Vector3 touchStart;
+    public float zoomOutMin = 1;
+    public float zoomOutMax = 120;
+    public float cameraSpeed = 0;
+    public float rotateSpeed = 5;
+    public Camera playerCamera;
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            touchStart = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            Vector3 direction = touchStart - playerCamera.ScreenToWorldPoint(Input.mousePosition);
+            playerCamera.transform.position += direction;
+        }
+
+        // Zoom in/out
+        playerCamera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * cameraSpeed;
+        playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize, zoomOutMin, zoomOutMax);
+
+        // Rotate camera
+        if (Input.GetMouseButton(1))
+        {
+            float rotationX = Input.GetAxis("Mouse X") * rotateSpeed;
+            float rotationY = Input.GetAxis("Mouse Y") * rotateSpeed;
+
+            playerCamera.transform.RotateAround(playerCamera.transform.position, Vector3.up, rotationX);
+            playerCamera.transform.RotateAround(playerCamera.transform.position, playerCamera.transform.right, -rotationY);
+        }
+    }
 }
