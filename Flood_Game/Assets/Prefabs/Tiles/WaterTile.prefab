@@ -102,6 +102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterTileV2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4eff5abe5337cbd498e42dc55f6188b7, type: 3}
+      propertyPath: m_TagString
+      value: Cell
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4eff5abe5337cbd498e42dc55f6188b7, type: 3}
@@ -110,3 +114,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4eff5abe5337cbd498e42dc55f6188b7, type: 3}
   m_PrefabInstance: {fileID: 3981297729277903642}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4287709286712278603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4eff5abe5337cbd498e42dc55f6188b7, type: 3}
+  m_PrefabInstance: {fileID: 3981297729277903642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5125471727274094722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287709286712278603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0af1e3acd49cb0409fce5816ed3a643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentWaterLevel: 1
+  MaximumWaterLevel: 1
+  ExceedingAmount: 0
+  ResistanceAmount: 1
+  CellType: 1
+  CellDefence: 0
+  waterMeshFilter: {fileID: -5754084199372789682, guid: 36e5602119c2e114a949affd4d824f42, type: 3}
+  grassMeshFilter: {fileID: -5754084199372789682, guid: 91ff5ac8d85449649b8e90dcf0176668, type: 3}
+  grassWithWater1: {fileID: -5754084199372789682, guid: aed5b57ae34c81d4382f06aecc51cdf7, type: 3}
+  grassWithWater2: {fileID: -5754084199372789682, guid: e1ce78436fc038f468e2889f28ddadce, type: 3}
+  grassWithWater3: {fileID: -5754084199372789682, guid: cbbe3fe9da1fc85418a4da33d35b40fc, type: 3}
