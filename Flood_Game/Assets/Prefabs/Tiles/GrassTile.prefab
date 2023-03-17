@@ -73,7 +73,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8874168161582272968}
-  - component: {fileID: 8117454040811736495}
   m_Layer: 0
   m_Name: GrassTile
   m_TagString: Untagged
@@ -97,19 +96,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8117454040811736495
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3624244761653329306}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &5181929430231087328
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +357,10 @@ PrefabInstance:
       value: GrassTile (1)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 91ff5ac8d85449649b8e90dcf0176668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 91ff5ac8d85449649b8e90dcf0176668, type: 3}
       propertyPath: m_TagString
       value: Cell
       objectReference: {fileID: 0}
@@ -399,6 +389,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 91ff5ac8d85449649b8e90dcf0176668, type: 3}
   m_PrefabInstance: {fileID: 4816198787146250953}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &6853993602096586512
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627241783580280728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 100, z: 100}
+  m_Center: {x: 0, y: 50, z: 0}
 --- !u!114 &381062168367150848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,8 +439,8 @@ MonoBehaviour:
   MaximumWaterLevel: 1
   ExceedingAmount: 0
   ResistanceAmount: 1
-  CellType: 2
-  CellDefence: 0
+  Celltype: 0
+  Celldefence: 0
   waterMeshFilter: {fileID: -5754084199372789682, guid: 36e5602119c2e114a949affd4d824f42, type: 3}
   grassMeshFilter: {fileID: -5754084199372789682, guid: 91ff5ac8d85449649b8e90dcf0176668, type: 3}
   grassWithWater1: {fileID: -5754084199372789682, guid: aed5b57ae34c81d4382f06aecc51cdf7, type: 3}
@@ -447,6 +450,7 @@ MonoBehaviour:
   Tree: {fileID: 1872930536124165959}
   LeakyDam: {fileID: 5181929430231087328}
   BetterDam: {fileID: 8997057487680117491}
+  CellID: 0
 --- !u!1001 &5188504911008389685
 PrefabInstance:
   m_ObjectHideFlags: 0

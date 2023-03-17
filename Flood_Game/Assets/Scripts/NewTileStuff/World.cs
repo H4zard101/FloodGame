@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<GameObject> cellObject = new List<GameObject>();
+    
     void Start()
     {
-        
+        foreach(GameObject cell in GameObject.FindGameObjectsWithTag("Cell"))
+        {
+            cellObject.Add(cell);
+
+            for (int i = 0; i < cellObject.Count; i++)
+            {
+                cell.GetComponent<Cell>().CellID++;
+            }
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

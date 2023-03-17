@@ -19,7 +19,7 @@ public class BuildingSystemV2 : MonoBehaviour
     public GameObject damPrefabV2;
     public GameObject wallPrefab;
 
-    private PlaceableObject objectToPlace;
+    //private PlaceableObject objectToPlace;
 
     [SerializeField] private LayerMask layerMask;
     public void Awake()
@@ -79,7 +79,7 @@ public class BuildingSystemV2 : MonoBehaviour
         Vector3 position = snapCoordinateToGrid(Vector3.zero);
 
         GameObject obj = Instantiate(prefab, position, Quaternion.identity);
-        objectToPlace = obj.GetComponent<PlaceableObject>();
+        //objectToPlace = obj.GetComponent<PlaceableObject>();
         obj.AddComponent<ObjectDrag>();
     }
     #endregion

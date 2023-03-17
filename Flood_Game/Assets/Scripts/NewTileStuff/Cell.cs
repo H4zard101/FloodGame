@@ -3,30 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum CellType
-{
-    Mud,
-    Water,
-    Grass,
-    GrassWithWater1,
-    GrassWithWater2,
-    GrassWithWater3,
-    
-}
 
-public enum CellDefence
-{
-    Empty,
-    Wall,
-    Tree,
-    LeakyDam,
-    BetterDam,
-    Urban,
-}
+
+
 
 
 public class Cell : MonoBehaviour
 {
+    public enum CellDefence
+    {
+        Empty,
+        Wall,
+        Tree,
+        LeakyDam,
+        BetterDam,
+        Urban,
+    }
+    public enum CellType
+    {
+        Mud,
+        Water,
+        Grass,
+        GrassWithWater1,
+        GrassWithWater2,
+        GrassWithWater3,
+
+    }
+
     // Cell Data
     public float CurrentWaterLevel = 0.0f;
     public float MaximumWaterLevel = 1.0f;
@@ -35,10 +38,10 @@ public class Cell : MonoBehaviour
 
 
     // Cell Type
-    public CellType CellType;
+    public CellType Celltype;
 
     // Cell Defence Type
-    public CellDefence CellDefence;
+    public CellDefence Celldefence;
 
 
     // Cell Meshes
@@ -54,7 +57,10 @@ public class Cell : MonoBehaviour
     public GameObject LeakyDam;
     public GameObject BetterDam;
 
+    // Cell ID
+    public int CellID;
 
+    public List<GameObject> neighbours;
     public void Update()
     {
         // This function will update the cell mesh depending on the current water level. Also this change will affect the enum of that particular cell
@@ -70,7 +76,7 @@ public class Cell : MonoBehaviour
         if (CurrentWaterLevel <= 0.2f)
         {
             this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassMeshFilter.sharedMesh;
-            CellType = CellType.Grass;
+            Celltype = CellType.Grass;
 
         }
 
@@ -78,7 +84,7 @@ public class Cell : MonoBehaviour
         else if (CurrentWaterLevel <= 0.4f)
         {
             this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater1.sharedMesh;
-            CellType = CellType.GrassWithWater1;
+            Celltype = CellType.GrassWithWater1;
 
         }
 
@@ -86,61 +92,65 @@ public class Cell : MonoBehaviour
         else if (CurrentWaterLevel <= 0.6f)
         {
             this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater2.sharedMesh;
-            CellType = CellType.GrassWithWater2;
+            Celltype = CellType.GrassWithWater2;
         }
 
         // GRASS BLOCK WITH SOME WATER 2
         else if (CurrentWaterLevel <= 0.8f)
         {
             this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater3.sharedMesh;
-            CellType = CellType.GrassWithWater3;
+            Celltype = CellType.GrassWithWater3;
         }
 
         // WATER BLOCK
         else if (CurrentWaterLevel >= 1.0f)
         {
             this.gameObject.GetComponent<MeshFilter>().sharedMesh = waterMeshFilter.sharedMesh;
-            CellType = CellType.Water;
+            Celltype = CellType.Water;
         }
     }
 
     public void UpdateCellDefence()
     {
         // if nothing is built in this cell;
-        if(CellDefence == CellDefence.Empty)
+        if(Celldefence == CellDefence.Empty)
         {
             return;
         }
 
-        else if (CellDefence == CellDefence.Tree)
+        else if (Celldefence == CellDefence.Tree)
         {
             Wall.SetActive(false);
             Tree.SetActive(true);
             LeakyDam.SetActive(false);
             BetterDam.SetActive(false);
+            ResistanceAmount = 1.5f;
         }
-        else if (CellDefence == CellDefence.Wall)
+        else if (Celldefence == CellDefence.Wall)
         {
             Wall.SetActive(true);
             Tree.SetActive(false);
             LeakyDam.SetActive(false);
             BetterDam.SetActive(false);
+            ResistanceAmount = 1.5f;
         }
-        else if (CellDefence == CellDefence.LeakyDam)
+        else if (Celldefence == CellDefence.LeakyDam)
         {
             Wall.SetActive(false);
             Tree.SetActive(false);
             LeakyDam.SetActive(true);
             BetterDam.SetActive(false);
+            ResistanceAmount = 2.0f;
         }
-        else if (CellDefence == CellDefence.BetterDam)
+        else if (Celldefence == CellDefence.BetterDam)
         {
             Wall.SetActive(false);
             Tree.SetActive(false);
             LeakyDam.SetActive(false);
             BetterDam.SetActive(true);
+            ResistanceAmount = 3.0f;
         }
-        else if(CellDefence == CellDefence.Urban)
+        else if(Celldefence == CellDefence.Urban)
         {
             return;
         }
