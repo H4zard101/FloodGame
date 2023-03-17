@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
-
-
-
 public class Cell : MonoBehaviour
 {
     public enum CellDefence
@@ -57,10 +51,36 @@ public class Cell : MonoBehaviour
     public GameObject LeakyDam;
     public GameObject BetterDam;
 
-    // Cell ID
-    public int CellID;
+    // Cell ID'S
+    public int Cell_X_ID;
+    public int Cell_Y_ID;
+    public int Cell_Z_ID;
 
     public List<GameObject> neighbours;
+
+    public void Start()
+    {
+        if (Celltype == CellType.Grass)
+        {
+            CurrentWaterLevel = 0.2f;
+        }
+        else if (Celltype == CellType.GrassWithWater1)
+        {
+            CurrentWaterLevel = 0.4f;
+        }
+        else if (Celltype == CellType.GrassWithWater2)
+        {
+            CurrentWaterLevel = 0.6f;
+        }
+        else if (Celltype == CellType.GrassWithWater3)
+        {
+            CurrentWaterLevel = 0.8f;
+        }
+        else if (Celltype == CellType.Water)
+        {
+            CurrentWaterLevel = 1.0f;
+        }
+    }
     public void Update()
     {
         // This function will update the cell mesh depending on the current water level. Also this change will affect the enum of that particular cell

@@ -99,8 +99,7 @@ public class BuildSystem : MonoBehaviour
 
         if (index == 0)
         {
-            BuildingCostToPlace.CostToPlace = 5;
-            Debug.Log(SelectedCell.gameObject.GetComponent<Cell>().CellID);
+            BuildingCostToPlace.CostToPlace = 5;          
         }
         else if (index == 1)
         {

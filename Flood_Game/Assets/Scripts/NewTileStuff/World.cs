@@ -14,7 +14,9 @@ public class World : MonoBehaviour
 
             for (int i = 0; i < cellObject.Count; i++)
             {
-                cell.GetComponent<Cell>().CellID++;
+                cell.GetComponent<Cell>().Cell_X_ID = (int)cell.transform.position.x;
+                cell.GetComponent<Cell>().Cell_Y_ID = (int)cell.transform.position.z;
+                cell.GetComponent<Cell>().Cell_Z_ID = (int)cell.transform.position.y;
             }
         }
 
