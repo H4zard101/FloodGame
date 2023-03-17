@@ -14,11 +14,10 @@ public class GameTimeManager : MonoBehaviour
 
     public GameObject stopButton;
     public GameObject startButton;
+    public GameObject pausedMenuPanelUi;
     public void Update()
     {
         gameTimeText.text = "X" + gameTimeSlider.value + " Speed";
-
-
     }
 
 
@@ -27,11 +26,13 @@ public class GameTimeManager : MonoBehaviour
         stopButton.SetActive(true);
         startButton.SetActive(false);
         isGamePaused = false;
+        pausedMenuPanelUi.SetActive(false);
     }
     public void PauseGame()
     {
         stopButton.SetActive(false);
         startButton.SetActive(true);
         isGamePaused = true;
+        pausedMenuPanelUi.SetActive(true);
     }
 }

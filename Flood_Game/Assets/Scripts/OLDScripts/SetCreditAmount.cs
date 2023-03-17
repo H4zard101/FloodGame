@@ -15,10 +15,13 @@ public class SetCreditAmount : MonoBehaviour
 
     public TextMeshProUGUI creditText;
 
+    public GameTimeManager gameTimeManager;
 
     public void Start()
     {
         creditText.text = "Credits : " + CreditAmount;
+        gameTimeManager = FindObjectOfType<GameTimeManager>();
+        _Time = maxTime / gameTimeManager.gameTimeSlider.value;
     }
 
     public void Update()
@@ -31,7 +34,7 @@ public class SetCreditAmount : MonoBehaviour
 
         else
         {
-            _Time = maxTime;
+            _Time = maxTime / gameTimeManager.gameTimeSlider.value;
             CreditAmount = CreditAmount + creditGain;
 
         }
