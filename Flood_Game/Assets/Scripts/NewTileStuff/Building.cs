@@ -32,7 +32,6 @@ public class Building : MonoBehaviour
             if (canPlace)
             {
                 SetCreditAmount.CreditAmount -= BuildingCostToPlace.CostToPlace;
-                Debug.Log(SetCreditAmount.CreditAmount);
                 canBuild = true;
             }
                  
