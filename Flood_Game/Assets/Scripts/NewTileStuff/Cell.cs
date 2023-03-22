@@ -106,6 +106,11 @@ public class Cell : MonoBehaviour
 
         // This function will update the cell defence type and make the diffrent defences visible to the user
         UpdateCellDefence();
+
+        if (CurrentWaterLevel >= 1.0f)
+        {
+            AffectNeighbours();
+        }
     }
 
     public void UpdateCellType()
@@ -199,36 +204,47 @@ public class Cell : MonoBehaviour
     {
         for (int i = 0; i < World.cellObject.Count; i++)
         {
-            if (World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID +1 && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
+            //neighbours = new List<GameObject>();
+
+            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
                 UpNeighbour = World.cellObject[i].gameObject;
-                //neighbours.Add(UpNeighbour);
+                neighbours.Add(UpNeighbour);
             }
-            if(World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
+            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
                 DownNeighbour = World.cellObject[i].gameObject;
-                //neighbours.Add(DownNeighbour);
+                neighbours.Add(DownNeighbour);
             }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID - 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID)
+            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID -1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
                 LeftNeighbour = World.cellObject[i].gameObject;
-                //neighbours.Add(LeftNeighbour);
+                neighbours.Add(LeftNeighbour);
             }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID)
+            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
                 RightNeighbour = World.cellObject[i].gameObject;
-                //neighbours.Add(RightNeighbour);
+                neighbours.Add(RightNeighbour);
             }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID)
+            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID + 1)
             {
                 ForwardNeighbour = World.cellObject[i].gameObject;
-                //neighbours.Add(ForwardNeighbour);
+                neighbours.Add(ForwardNeighbour);
             }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID - 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID)
+            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID - 1)
             {
                 BackNeighbour = World.cellObject[i].gameObject;
-                //neighbours.Add(BackNeighbour);
+                neighbours.Add(BackNeighbour);
             }
         }
+    }
+    public void AffectNeighbours()
+    {
+        ExceedingAmount = CurrentWaterLevel - MaximumWaterLevel;
+        for (int i = 0; i < neighbours.Count; i++)
+        {
+            neighbours[i].GetComponent<Cell>().CurrentWaterLevel += ExceedingAmount / neighbours.Count;
+        }
+        CurrentWaterLevel -= ExceedingAmount;
     }
 }
