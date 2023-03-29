@@ -43,7 +43,7 @@ public class PanZoom : MonoBehaviour
         playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 }*/
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,7 +92,72 @@ public class PanZoom : MonoBehaviour
 
         playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
+}*/
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PanZoom : MonoBehaviour
+{
+    private Vector3 touchStart;
+    public float zoomOutMin = 1f;
+    public float zoomOutMax = 120f;
+    public float cameraSpeed = 1f;
+    public float rotateSpeed = 5f;
+    public Camera playerCamera;
+
+    private Quaternion targetRotation;
+    private float xRotation = 0f;
+    private float yRotation = 0f;
+
+    [Header("Camera Rotation")]
+    public float minYAngle = 0f;
+    public float maxYAngle = 90f;
+    public float rotationSmoothness = 10f;
+    private float currentXRotation = 0f;
+    private float currentYRotation = 0f;
+
+    void Start()
+    {
+        targetRotation = playerCamera.transform.rotation;
+        currentXRotation = targetRotation.eulerAngles.x;
+        currentYRotation = targetRotation.eulerAngles.y;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            touchStart = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            Vector3 direction = touchStart - playerCamera.ScreenToWorldPoint(Input.mousePosition);
+            playerCamera.transform.position += direction;
+        }
+
+        // Zoom in/out
+        playerCamera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * cameraSpeed;
+        playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize, zoomOutMin, zoomOutMax);
+
+        // Rotate camera
+        if (Input.GetMouseButton(1))
+        {
+            float rotationX = Input.GetAxis("Mouse X") * rotateSpeed;
+            float rotationY = Input.GetAxis("Mouse Y") * rotateSpeed;
+
+            currentXRotation -= rotationY;
+            currentYRotation += rotationX;
+
+            currentXRotation = Mathf.Clamp(currentXRotation, minYAngle, maxYAngle);
+
+            targetRotation = Quaternion.Euler(currentXRotation, currentYRotation, 0f);
+        }
+
+        playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, targetRotation, Time.deltaTime * rotationSmoothness);
+    }
 }
+
 
 
 
