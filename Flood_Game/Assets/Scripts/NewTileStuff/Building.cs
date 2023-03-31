@@ -25,7 +25,6 @@ public class Building : MonoBehaviour
 
             if (SetCreditAmount.CreditAmount < BuildingCostToPlace.CostToPlace)
             {
-                Debug.Log("hello");
                 canPlace = false;
                 outOfMoney = true;
             }
@@ -36,6 +35,7 @@ public class Building : MonoBehaviour
             }
                  
         }
+
     }
     public void BuildTree()
     {

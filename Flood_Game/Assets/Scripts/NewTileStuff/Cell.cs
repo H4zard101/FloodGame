@@ -52,9 +52,9 @@ public class Cell : MonoBehaviour
     public GameObject BetterDam;
 
     // Cell ID'S
-    public int Cell_X_ID;
-    public int Cell_Y_ID;
-    public int Cell_Z_ID;
+    public float Cell_X_ID;
+    public float Cell_Y_ID;
+    public float Cell_Z_ID;
 
 
     // Cells Neighbours
@@ -71,10 +71,12 @@ public class Cell : MonoBehaviour
 
 
     public World World;
+    public SelectedCell selectedCell;
     public void Start()
     {
 
         World = FindObjectOfType <World>();
+        selectedCell = FindObjectOfType<SelectedCell>();
 
         if (Celltype == CellType.Grass)
         {
@@ -107,7 +109,7 @@ public class Cell : MonoBehaviour
         // This function will update the cell defence type and make the diffrent defences visible to the user
         UpdateCellDefence();
 
-        if (CurrentWaterLevel >= 1.0f)
+        if (CurrentWaterLevel >= MaximumWaterLevel)
         {
             AffectNeighbours();
         }
@@ -168,6 +170,7 @@ public class Cell : MonoBehaviour
             LeakyDam.SetActive(false);
             BetterDam.SetActive(false);
             ResistanceAmount = 1.5f;
+            MaximumWaterLevel = ResistanceAmount;
         }
         else if (Celldefence == CellDefence.Wall)
         {
@@ -176,6 +179,9 @@ public class Cell : MonoBehaviour
             LeakyDam.SetActive(false);
             BetterDam.SetActive(false);
             ResistanceAmount = 1.5f;
+            MaximumWaterLevel = ResistanceAmount;
+
+
         }
         else if (Celldefence == CellDefence.LeakyDam)
         {
@@ -184,6 +190,8 @@ public class Cell : MonoBehaviour
             LeakyDam.SetActive(true);
             BetterDam.SetActive(false);
             ResistanceAmount = 2.0f;
+            MaximumWaterLevel = ResistanceAmount;
+
         }
         else if (Celldefence == CellDefence.BetterDam)
         {
@@ -192,6 +200,8 @@ public class Cell : MonoBehaviour
             LeakyDam.SetActive(false);
             BetterDam.SetActive(true);
             ResistanceAmount = 3.0f;
+            MaximumWaterLevel = ResistanceAmount;
+
         }
         else if(Celldefence == CellDefence.Urban)
         {
@@ -206,35 +216,38 @@ public class Cell : MonoBehaviour
         {
             //neighbours = new List<GameObject>();
 
+
+            // Adding Neighbour Cells
             if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
-                UpNeighbour = World.cellObject[i].gameObject;
-                neighbours.Add(UpNeighbour);
+                // Up Neighbour
+                neighbours.Add(World.cellObject[i].gameObject);
             }
             if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
-                DownNeighbour = World.cellObject[i].gameObject;
-                neighbours.Add(DownNeighbour);
+                // Down Neighbour
+                neighbours.Add(World.cellObject[i].gameObject);
             }
             if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID -1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
-                LeftNeighbour = World.cellObject[i].gameObject;
-                neighbours.Add(LeftNeighbour);
+                // Left Neighbour
+                neighbours.Add(World.cellObject[i].gameObject);
             }
             if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
-                RightNeighbour = World.cellObject[i].gameObject;
-                neighbours.Add(RightNeighbour);
+                // Right Neighbour
+                neighbours.Add(World.cellObject[i].gameObject);
             }
+
             if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID + 1)
             {
-                ForwardNeighbour = World.cellObject[i].gameObject;
-                neighbours.Add(ForwardNeighbour);
+                // Forward Neighbour
+                neighbours.Add(World.cellObject[i].gameObject);
             }
             if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID - 1)
             {
-                BackNeighbour = World.cellObject[i].gameObject;
-                neighbours.Add(BackNeighbour);
+                // Back Neighbour
+                neighbours.Add(World.cellObject[i].gameObject);
             }
         }
     }

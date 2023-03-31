@@ -9,16 +9,22 @@ public class SelectedCell : MonoBehaviour
     public GameObject BuildUI;
     public GameObject BuildObjects;
 
+    public bool isLand;
+    public bool isWater;
+
+    public LayerMask layerMask;
+
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out RaycastHit hit))
+            if(Physics.Raycast(ray, out RaycastHit hit, 1000,layerMask))
             {
-                selectedCell = hit.collider.gameObject;
+                selectedCell = hit.collider.gameObject;            
                 BuildUI.SetActive(true);
             }
+                
         }
 
         
