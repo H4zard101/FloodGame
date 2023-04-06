@@ -56,6 +56,7 @@ public class PanZoom : MonoBehaviour
     public float rotateSpeed = 5;
     public Camera playerCamera;
 
+    public static bool isMoving = false;
     private Quaternion targetRotation;
     private Vector3 pivotPoint;
 
@@ -76,6 +77,14 @@ public class PanZoom : MonoBehaviour
             Vector3 direction = touchStart - playerCamera.ScreenToWorldPoint(Input.mousePosition);
             playerCamera.transform.position += direction;
             pivotPoint += direction;
+            if(direction.x >= 0 || direction.y >= 0 || direction.z >= 0)
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
         }
 
         // Zoom in/out

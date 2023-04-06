@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
+    public enum CellSpace
+    {
+        Empty,
+        Taken,
+    }
+
     public enum CellDefence
     {
         Empty,
@@ -11,7 +17,6 @@ public class Cell : MonoBehaviour
         Tree,
         LeakyDam,
         BetterDam,
-        Urban,
     }
     public enum CellType
     {
@@ -37,6 +42,9 @@ public class Cell : MonoBehaviour
     // Cell Defence Type
     public CellDefence Celldefence;
 
+    // Cell Space Type
+    public CellSpace Cellspace;
+
 
     // Cell Meshes
     public MeshFilter waterMeshFilter;
@@ -50,6 +58,7 @@ public class Cell : MonoBehaviour
     public GameObject Tree;
     public GameObject LeakyDam;
     public GameObject BetterDam;
+    public GameObject Urban;
 
     // Cell ID'S
     public float Cell_X_ID;
@@ -99,6 +108,7 @@ public class Cell : MonoBehaviour
             CurrentWaterLevel = 1.0f;
         }
 
+        InitUrbanArea();
         AddNeighbourCells();
     }
     public void Update()
@@ -203,13 +213,20 @@ public class Cell : MonoBehaviour
             MaximumWaterLevel = ResistanceAmount;
 
         }
-        else if(Celldefence == CellDefence.Urban)
-        {
-            return;
-        }
 
     }
 
+    public void InitUrbanArea()
+    {
+        if(Cellspace == CellSpace.Taken)
+        {
+            Urban.SetActive(true);
+        }
+        else
+        {
+            Urban.SetActive(false);
+        }
+    }    
     public void AddNeighbourCells()
     {
         for (int i = 0; i < World.cellObject.Count; i++)
