@@ -7,7 +7,6 @@ public class BuildTrigger : MonoBehaviour
 {
     public GameObject buildPanel;
 
-
     public void BuildButtons()
     {
         buildPanel.SetActive(true);

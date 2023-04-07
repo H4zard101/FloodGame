@@ -6,6 +6,7 @@ public class CancelTrigger : MonoBehaviour
 {
     public GameObject cancelButton;
     public SelectedCell selectedCell;
+    public GameObject bottomPanel;
 
     public void Start()
     {
@@ -13,9 +14,10 @@ public class CancelTrigger : MonoBehaviour
     }
     public void CancelButtons()
     {
-        //selectedCell.transform.GetChild(5).gameObject.SetActive(false);
+        selectedCell.selectedCell.transform.GetChild(5).gameObject.SetActive(false);
         selectedCell.inMenu = false;
-        selectedCell = null;
+        //selectedCell = null;
         cancelButton.SetActive(false);
+        bottomPanel.SetActive(false); 
     }
 }
