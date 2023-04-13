@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2088076732884732860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1537951234850977895}
+  m_Layer: 0
+  m_Name: SNOW CLOUDS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1537951234850977895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088076732884732860}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 504.99988, y: 376.44147, z: -6242.4116}
+  m_LocalScale: {x: 1000, y: 1000, z: 1000}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2964642869946469373}
+  - {fileID: 2964642870985442583}
+  m_Father: {fileID: 3363695819153142805}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2481296851496440135
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +44,6 @@ GameObject:
   - component: {fileID: 2964642869946469373}
   - component: {fileID: 2200955573602796632}
   - component: {fileID: 4138713667880497298}
-  - component: {fileID: 3363695818604616299}
   m_Layer: 0
   m_Name: Clouds (3)
   m_TagString: Untagged
@@ -27,11 +59,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2481296851496440135}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -230.47852, y: 378.39746, z: -6243}
-  m_LocalScale: {x: 20000, y: 20000, z: 20000}
+  m_LocalPosition: {x: -0.7354784, y: 0.0019559937, z: -0.0005898438}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3363695819153142805}
+  m_Father: {fileID: 1537951234850977895}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2200955573602796632
@@ -84,21 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3363695818604616299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2481296851496440135}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86690213a6c19f2468b13bcf539d177a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rainParticles: {fileID: 0}
-  snowParticles: {fileID: 0}
-  weatherChangeInterval: 5
 --- !u!1 &2481296852445241261
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +127,7 @@ GameObject:
   - component: {fileID: 2964642870985442583}
   - component: {fileID: 2200955572561660594}
   - component: {fileID: 4138713669051924088}
-  - component: {fileID: 3363695820528898043}
+  - component: {fileID: 7161582526471520979}
   m_Layer: 0
   m_Name: Clouds (4)
   m_TagString: Untagged
@@ -126,12 +143,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2481296852445241261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 505, y: 378.39746, z: -6243}
-  m_LocalScale: {x: 20000, y: 20000, z: 20000}
+  m_LocalPosition: {x: 0, y: 0.0019559937, z: -0.0005903321}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3363695819623496659}
-  m_Father: {fileID: 3363695819153142805}
+  m_Father: {fileID: 1537951234850977895}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2200955572561660594
@@ -184,7 +201,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3363695820528898043
+--- !u!114 &7161582526471520979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,12 +210,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2481296852445241261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86690213a6c19f2468b13bcf539d177a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a4f11cd2fccd2949a9635211a1c5254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rainParticles: {fileID: 0}
   snowParticles: {fileID: 3363695819623496657}
-  weatherChangeInterval: 5
+  weatherChangeInterval: 30
 --- !u!1 &3363695819153142806
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,10 +243,9 @@ Transform:
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2964642869946469373}
-  - {fileID: 2964642870985442583}
+  - {fileID: 1537951234850977895}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3363695819623496652
 GameObject:
@@ -258,8 +273,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3363695819623496652}
   m_LocalRotation: {x: 0.15463148, y: -0.6470854, z: 0.7199848, w: 0.19746266}
-  m_LocalPosition: {x: -0.022599297, y: -0.0032999984, z: 0.0035994872}
-  m_LocalScale: {x: 0.56455, y: 0.53751, z: 0.8773984}
+  m_LocalPosition: {x: -0.016999995, y: -0.0032999986, z: 0.0035994877}
+  m_LocalScale: {x: 0.56455004, y: 0.53751, z: 0.8773983}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2964642870985442583}

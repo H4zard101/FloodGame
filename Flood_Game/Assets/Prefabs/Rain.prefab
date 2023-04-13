@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4912,7 +4912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rainParticles: {fileID: 4798086186226495057}
-  weatherChangeInterval: 10
+  weatherChangeInterval: 20
 --- !u!1 &2585072826254882992
 GameObject:
   m_ObjectHideFlags: 0
@@ -4924,7 +4924,6 @@ GameObject:
   - component: {fileID: 2930671993636233738}
   - component: {fileID: 2234925831464988079}
   - component: {fileID: 4098551063634794853}
-  - component: {fileID: 3396118582968550489}
   m_Layer: 0
   m_Name: Clouds (3)
   m_TagString: Untagged
@@ -4997,21 +4996,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3396118582968550489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2585072826254882992}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86690213a6c19f2468b13bcf539d177a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rainParticles: {fileID: 0}
-  snowParticles: {fileID: 0}
-  weatherChangeInterval: 5
 --- !u!1 &2585072826982716076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5155,6 +5139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3396118583269749202}
+  - component: {fileID: 316781099}
   m_Layer: 0
   m_Name: Rain
   m_TagString: Untagged
@@ -5178,3 +5163,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &316781099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396118583269749203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe85d5424be520448cd549c1f2a38e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudPrefab: {fileID: 3396118583149770880}
+  numberOfClouds: 2
+  minX: -10
+  maxX: 10
+  minY: 2
+  maxY: 6
+  minZ: -10
+  maxZ: 10
+  minScale: 1.5
+  maxScale: 1.5
+  moveDelay: 20
