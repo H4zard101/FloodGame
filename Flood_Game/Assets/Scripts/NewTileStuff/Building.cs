@@ -25,7 +25,6 @@ public class Building : MonoBehaviour
 
             if (SetCreditAmount.CreditAmount < BuildingCostToPlace.CostToPlace)
             {
-                Debug.Log("hello");
                 canPlace = false;
                 outOfMoney = true;
             }
@@ -36,6 +35,7 @@ public class Building : MonoBehaviour
             }
                  
         }
+
     }
     public void BuildTree()
     {
@@ -43,11 +43,12 @@ public class Building : MonoBehaviour
         selectedObject.transform.GetChild(0);
         selectedObject.GetComponent<Cell>().Celldefence = Cell.CellDefence.Tree;
         BuildingCostToPlace.CostToPlace = 5;
-
+        selectedObject.transform.GetChild(5).gameObject.SetActive(false);
         SelectedCell.BuildUI.SetActive(false);
         SelectedCell.BuildObjects.SetActive(false);
-
+        SelectedCell.inMenu = false;
         canBuild = false;
+
 
     }
     public void BuildLeakyDam()
@@ -56,10 +57,10 @@ public class Building : MonoBehaviour
         selectedObject.transform.GetChild(0);
         selectedObject.GetComponent<Cell>().Celldefence = Cell.CellDefence.LeakyDam;
         BuildingCostToPlace.CostToPlace = 10;
-
+        selectedObject.transform.GetChild(5).gameObject.SetActive(false);
         SelectedCell.BuildUI.SetActive(false);
         SelectedCell.BuildObjects.SetActive(false);
-
+        SelectedCell.inMenu = false;
         canBuild = false;
 
     }
@@ -69,10 +70,10 @@ public class Building : MonoBehaviour
         selectedObject.transform.GetChild(0);
         selectedObject.GetComponent<Cell>().Celldefence = Cell.CellDefence.BetterDam;
         BuildingCostToPlace.CostToPlace = 25;
-
+        selectedObject.transform.GetChild(5).gameObject.SetActive(false);
         SelectedCell.BuildUI.SetActive(false);
         SelectedCell.BuildObjects.SetActive(false);
-
+        SelectedCell.inMenu = false;
         canBuild = false;
     }
     public void BuildWall()
@@ -81,10 +82,10 @@ public class Building : MonoBehaviour
         selectedObject.transform.GetChild(0);
         selectedObject.GetComponent<Cell>().Celldefence = Cell.CellDefence.Wall;
         BuildingCostToPlace.CostToPlace = 10;
-
+        selectedObject.transform.GetChild(5).gameObject.SetActive(false);
         SelectedCell.BuildUI.SetActive(false);
         SelectedCell.BuildObjects.SetActive(false);
-
+        SelectedCell.inMenu = false;
         canBuild = false;
 
     }

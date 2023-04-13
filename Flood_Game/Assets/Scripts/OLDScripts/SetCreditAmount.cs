@@ -26,18 +26,23 @@ public class SetCreditAmount : MonoBehaviour
 
     public void Update()
     {
-        if (_Time > 0)
+        if (gameTimeManager.isGamePaused == false)
         {
-            _Time -= Time.deltaTime;
+            if (_Time > 0)
+            {
+                _Time -= Time.deltaTime;
+
+            }
+
+            else
+            {
+                _Time = maxTime / gameTimeManager.gameTimeSlider.value;
+                CreditAmount = CreditAmount + creditGain;
+
+            }
+            creditText.text = "Credits : " + CreditAmount;
+
 
         }
-
-        else
-        {
-            _Time = maxTime / gameTimeManager.gameTimeSlider.value;
-            CreditAmount = CreditAmount + creditGain;
-
-        }
-        creditText.text = "Credits : " + CreditAmount;
     }
 }
