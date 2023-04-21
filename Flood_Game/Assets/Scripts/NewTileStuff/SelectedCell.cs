@@ -25,31 +25,42 @@ public class SelectedCell : MonoBehaviour
     public TMP_Text currentWaterLevelUi;
     public TMP_Text maxWaterUi;
 
+    public World world;
+
+    public void Start()
+    {
+        world = FindObjectOfType<World>();
+    }
+
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && inMenu == false)
+        if(world.phase == World.Phase.Build)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
+            if (Input.GetMouseButtonDown(0) && inMenu == false)
             {
-                selectedCell = hit.collider.gameObject;              
-                selectedCell.transform.GetChild(5).gameObject.SetActive(true);
-                BuildUI.SetActive(true);
-                inMenu = true;
-                Debug.Log(selectedCell.GetComponent<Cell>().Celltype);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
+                {
+                    selectedCell = hit.collider.gameObject;
+                    selectedCell.transform.GetChild(5).gameObject.SetActive(true);
+                    BuildUI.SetActive(true);
+                    inMenu = true;
+                    Debug.Log(selectedCell.GetComponent<Cell>().Celltype);
 
-                selectedCellUi.text = "Selected Cell: " + selectedCell.GetComponent<Cell>().Celltype.ToString();
-                cellDefenceUi.text = "Cell Defence: " + selectedCell.GetComponent<Cell>().Celldefence.ToString();
-                currentWaterLevelUi.text = "Current Water Level: " + selectedCell.GetComponent<Cell>().CurrentWaterLevel.ToString();
-                maxWaterUi.text = "Max Water Level: " + selectedCell.GetComponent<Cell>().MaximumWaterLevel.ToString();               
+                    selectedCellUi.text = "Selected Cell: " + selectedCell.GetComponent<Cell>().Celltype.ToString();
+                    cellDefenceUi.text = "Cell Defence: " + selectedCell.GetComponent<Cell>().Celldefence.ToString();
+                    currentWaterLevelUi.text = "Current Water Level: " + selectedCell.GetComponent<Cell>().CurrentWaterLevel.ToString();
+                    maxWaterUi.text = "Max Water Level: " + selectedCell.GetComponent<Cell>().MaximumWaterLevel.ToString();
+                }
+                else
+                {
+                    selectedCell = null;
+                }
+
             }
-            else
-            {
-                selectedCell = null;
-            }
-                
+            UpdateDataUi();
         }
-        UpdateDataUi();
+        
 
         
     }

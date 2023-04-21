@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
+    public enum Phase
+    {
+        Build,
+        Simulation,
+    }
+
+    public Phase phase;
+
+
+    public void Start()
+    {
+        phase = Phase.Build;
+    }
     public List<GameObject> cellObject = new List<GameObject>();
     
     void Awake()

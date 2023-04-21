@@ -14,7 +14,7 @@ public class SetCreditAmount : MonoBehaviour
     public float maxTime = 3;
 
     public TextMeshProUGUI creditText;
-
+    public World world;
     public GameTimeManager gameTimeManager;
 
     public void Start()
@@ -22,27 +22,30 @@ public class SetCreditAmount : MonoBehaviour
         creditText.text = "Credits : " + CreditAmount;
         gameTimeManager = FindObjectOfType<GameTimeManager>();
         _Time = maxTime / gameTimeManager.gameTimeSlider.value;
+        world = FindObjectOfType<World>();
     }
 
     public void Update()
     {
-        if (gameTimeManager.isGamePaused == false)
+        if(world.phase == World.Phase.Simulation)
         {
-            if (_Time > 0)
+            if (gameTimeManager.isGamePaused == false)
             {
-                _Time -= Time.deltaTime;
+                if (_Time > 0)
+                {
+                    _Time -= Time.deltaTime;
 
+                }
+                else
+                {
+                    _Time = maxTime / gameTimeManager.gameTimeSlider.value;
+                    CreditAmount = CreditAmount + creditGain;
+
+                }
+                
             }
-
-            else
-            {
-                _Time = maxTime / gameTimeManager.gameTimeSlider.value;
-                CreditAmount = CreditAmount + creditGain;
-
-            }
-            creditText.text = "Credits : " + CreditAmount;
-
-
         }
+        creditText.text = "Credits : " + CreditAmount;
+
     }
 }
