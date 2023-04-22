@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8245247079096710321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MudTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,8 +101,12 @@ PrefabInstance:
       value: MudTile
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a38bbdc7d3f41554eb9756cb4e177fef, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a38bbdc7d3f41554eb9756cb4e177fef, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Cell
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -125,6 +129,48 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 100, y: 100, z: 100}
   m_Center: {x: 0, y: 50, z: 0}
+--- !u!114 &2697165942947552373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349533703017012634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0af1e3acd49cb0409fce5816ed3a643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentWaterLevel: 0
+  MaximumWaterLevel: 1
+  ExceedingAmount: 0
+  ResistanceAmount: 0
+  hasBottomNeighbour: 0
+  Celltype: 0
+  Celldefence: 0
+  Cellspace: 0
+  waterMeshFilter: {fileID: -5754084199372789682, guid: 1f1d9c783286d074dad99f0f5e80699b, type: 3}
+  grassMeshFilter: {fileID: -5754084199372789682, guid: 6cd70e185a059a244a6ecfcdf03bc6ed, type: 3}
+  grassWithWater1: {fileID: -5754084199372789682, guid: 4beb0e1d00ebd5c41bb74f1207739615, type: 3}
+  grassWithWater2: {fileID: -5754084199372789682, guid: dcebbe3c8faceb14a97e21f755b1f2a0, type: 3}
+  grassWithWater3: {fileID: -5754084199372789682, guid: 73ac1f3cfc2a2454191951d31716f25c, type: 3}
+  Wall: {fileID: 0}
+  Tree: {fileID: 0}
+  LeakyDam: {fileID: 0}
+  BetterDam: {fileID: 0}
+  Urban: {fileID: 0}
+  Cell_X_ID: 0
+  Cell_Y_ID: 0
+  Cell_Z_ID: 0
+  UpNeighbour: {fileID: 0}
+  DownNeighbour: {fileID: 0}
+  ForwardNeighbour: {fileID: 0}
+  BackNeighbour: {fileID: 0}
+  LeftNeighbour: {fileID: 0}
+  RightNeighbour: {fileID: 0}
+  neighbours: []
+  World: {fileID: 0}
+  selectedCell: {fileID: 0}
 --- !u!4 &1869364845406537504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a38bbdc7d3f41554eb9756cb4e177fef, type: 3}

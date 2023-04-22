@@ -35,6 +35,7 @@ public class Cell : MonoBehaviour
     public float ExceedingAmount = 0.0f;
     public float ResistanceAmount = 0.0f;
 
+    public bool hasBottomNeighbour = false;
 
     // Cell Type
     public CellType Celltype;
@@ -67,12 +68,12 @@ public class Cell : MonoBehaviour
 
 
     // Cells Neighbours
-    //public GameObject UpNeighbour;
-    //public GameObject DownNeighbour;
-    //public GameObject ForwardNeighbour;
-    //public GameObject BackNeighbour;
-    //public GameObject LeftNeighbour;
-    //public GameObject RightNeighbour;
+    public GameObject UpNeighbour;
+    public GameObject DownNeighbour;
+    public GameObject ForwardNeighbour;
+    public GameObject BackNeighbour;
+    public GameObject LeftNeighbour;
+    public GameObject RightNeighbour;
 
 
     // List of Neighbours
@@ -232,49 +233,89 @@ public class Cell : MonoBehaviour
     }    
     public void AddNeighbourCells()
     {
+        
         for (int i = 0; i < World.cellObject.Count; i++)
         {
             //neighbours = new List<GameObject>();
-
-
-            // Adding Neighbour Cells
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID + 1 && 
-                World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
-            {
-                // Up Neighbour
-                neighbours.Add(World.cellObject[i].gameObject);
-            }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 && 
+            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 &&
                 World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
             {
                 // Down Neighbour
-                neighbours.Add(World.cellObject[i].gameObject);
-            }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID -1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && 
-                World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
-            {
-                // Left Neighbour
-                neighbours.Add(World.cellObject[i].gameObject);
-            }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && 
-                World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
-            {
-                // Right Neighbour
-                neighbours.Add(World.cellObject[i].gameObject);
+                //neighbours.Add(World.cellObject[i].gameObject);
+                hasBottomNeighbour = true;
+
             }
 
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && 
-                World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID + 1)
+
+            //if (hasBottomNeighbour)
+            //{
+                if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 &&
+                    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID + 1)
+                {
+                    // Down Forward Neighbour
+                    ForwardNeighbour = World.cellObject[i].gameObject;
+                    neighbours.Add(World.cellObject[i].gameObject);
+                }
+
+                if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 &&
+                    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID - 1)
+                {
+                    // Down Back Neighbour
+                    BackNeighbour = World.cellObject[i].gameObject;
+                    neighbours.Add(World.cellObject[i].gameObject);
+                    
+                }
+            //}
+            if (!hasBottomNeighbour)
             {
-                // Forward Neighbour
-                neighbours.Add(World.cellObject[i].gameObject);
+                if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID - 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID &&
+                    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
+                {
+                    // Left Neighbour
+                    neighbours.Add(World.cellObject[i].gameObject);
+                }
+
+                if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID + 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID &&
+                    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
+                {
+                    // Right Neighbour
+                    neighbours.Add(World.cellObject[i].gameObject);
+                }
+
+                if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID &&
+                    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID + 1)
+                {
+                    // Forward Neighbour
+                    neighbours.Add(World.cellObject[i].gameObject);
+                }
+
+                if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID &&
+                    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID - 1)
+                {
+                    // Back Neighbour
+                    neighbours.Add(World.cellObject[i].gameObject);
+                }
             }
-            if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID && 
-                World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID - 1)
-            {
-                // Back Neighbour
-                neighbours.Add(World.cellObject[i].gameObject);
-            }
+
+
+            //// Do we need the UP neighbour
+            //if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID + 1 && 
+            //    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
+            //{
+            //    // Up Neighbour
+            //    neighbours.Add(World.cellObject[i].gameObject);
+            //}
+
+            //if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 && 
+            //    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
+            //{
+            //    // Down Neighbour
+            //    neighbours.Add(World.cellObject[i].gameObject);
+            //}
+
+
+
+
         }
     }
     public void AffectNeighbours()
