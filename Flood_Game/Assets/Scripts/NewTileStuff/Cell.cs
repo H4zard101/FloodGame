@@ -35,6 +35,7 @@ public class Cell : MonoBehaviour
     public float ExceedingAmount = 0.0f;
     public float ResistanceAmount = 0.0f;
 
+    // Should the water flow down or spread out
     public bool hasBottomNeighbour = false;
 
     // Cell Type
@@ -321,6 +322,7 @@ public class Cell : MonoBehaviour
     public void AffectNeighbours()
     {
         ExceedingAmount = CurrentWaterLevel - MaximumWaterLevel;
+
         for (int i = 0; i < neighbours.Count; i++)
         {
             neighbours[i].GetComponent<Cell>().CurrentWaterLevel += ExceedingAmount / neighbours.Count;
