@@ -30,6 +30,7 @@ public class Cell : MonoBehaviour
     }
 
     // Cell Data
+    public float pervWaterLevel = 0.0f;
     public float CurrentWaterLevel = 0.0f;
     public float MaximumWaterLevel = 1.0f;
     public float ExceedingAmount = 0.0f;
@@ -68,16 +69,6 @@ public class Cell : MonoBehaviour
     public float Cell_Y_ID;
     public float Cell_Z_ID;
 
-
-    // Cells Neighbours
-    public GameObject UpNeighbour;
-    public GameObject DownNeighbour;
-    public GameObject ForwardNeighbour;
-    public GameObject BackNeighbour;
-    public GameObject LeftNeighbour;
-    public GameObject RightNeighbour;
-
-
     // List of Neighbours
     public List<GameObject> neighbours = new List<GameObject>();
 
@@ -90,10 +81,10 @@ public class Cell : MonoBehaviour
         World = FindObjectOfType <World>();
         selectedCell = FindObjectOfType<SelectedCell>();
 
-
         if (Celltype == CellType.Mud)
         {
             CurrentWaterLevel = 0.0f;
+            
         }
         else if (Celltype == CellType.Grass)
         {
@@ -116,6 +107,7 @@ public class Cell : MonoBehaviour
             CurrentWaterLevel = 1.0f;
         }
 
+        pervWaterLevel = CurrentWaterLevel;
         // Spawn in urban areas
         InitUrbanArea();
 
@@ -138,51 +130,84 @@ public class Cell : MonoBehaviour
 
     public void UpdateCellType()
     {
+
+        
         // MUD BLOCK
-        if (CurrentWaterLevel == 0.0f)
+        if (CurrentWaterLevel == 0.0f )
         {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = mudMeshFilter.sharedMesh;
-            Celltype = CellType.Mud;
+            ChangeCellType(CellType.Mud);
 
         }
         // GRASS BLOCK
-        if (CurrentWaterLevel <= 0.2f)
+        else if (CurrentWaterLevel <= 0.2f)
         {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassMeshFilter.sharedMesh;
-            Celltype = CellType.Grass;
+            ChangeCellType(CellType.Grass);
 
         }
 
         // GRASS BLOCK WITH SOME WATER
-        else if (CurrentWaterLevel <= 0.4f)
+        else if (CurrentWaterLevel <= 0.4f )
         {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater1.sharedMesh;
-            Celltype = CellType.GrassWithWater1;
+            ChangeCellType(CellType.GrassWithWater1);
 
         }
 
         // GRASS BLOCK WITH SOME WATER 2
-        else if (CurrentWaterLevel <= 0.6f)
+        else if (CurrentWaterLevel <= 0.6f )
         {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater2.sharedMesh;
-            Celltype = CellType.GrassWithWater2;
+            ChangeCellType(CellType.GrassWithWater2);
+
         }
 
         // GRASS BLOCK WITH SOME WATER 2
-        else if (CurrentWaterLevel <= 0.8f)
+        else if (CurrentWaterLevel <= 0.8f )
         {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater3.sharedMesh;
-            Celltype = CellType.GrassWithWater3;
+            ChangeCellType(CellType.GrassWithWater3);
+
         }
 
         // WATER BLOCK
-        else if (CurrentWaterLevel >= 1.0f)
+        else if (CurrentWaterLevel >= 1.0f )
         {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = waterMeshFilter.sharedMesh;
-            Celltype = CellType.Water;
+            ChangeCellType(CellType.Water);
+
         }
     }
 
+
+    public void ChangeCellType(CellType cellType)
+    {
+        if (this.Celltype == cellType)
+            return;
+
+        switch (cellType)
+        {
+            case CellType.Mud:
+                this.gameObject.GetComponent<MeshFilter>().sharedMesh = mudMeshFilter.sharedMesh;
+                Celltype = CellType.Mud;
+                break;
+            case CellType.Grass:
+                this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassMeshFilter.sharedMesh;
+                Celltype = CellType.Grass;
+                break;
+            case CellType.GrassWithWater1:
+                this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater1.sharedMesh;
+                Celltype = CellType.GrassWithWater1;
+                break;
+            case CellType.GrassWithWater2:
+                this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater2.sharedMesh;
+                Celltype = CellType.GrassWithWater2;
+                break;
+            case CellType.GrassWithWater3:
+                this.gameObject.GetComponent<MeshFilter>().sharedMesh = grassWithWater3.sharedMesh;
+                Celltype = CellType.GrassWithWater3;
+                break;
+            case CellType.Water:
+                this.gameObject.GetComponent<MeshFilter>().sharedMesh = waterMeshFilter.sharedMesh;
+                Celltype = CellType.Water;
+                break;
+        }
+    }
     public void UpdateCellDefence()
     {
         // if nothing is built in this cell;
@@ -193,47 +218,71 @@ public class Cell : MonoBehaviour
 
         else if (Celldefence == CellDefence.Tree)
         {
-            Wall.SetActive(false);
-            Tree.SetActive(true);
-            LeakyDam.SetActive(false);
-            BetterDam.SetActive(false);
-            ResistanceAmount = 1.5f;
-            MaximumWaterLevel = ResistanceAmount;
+
+            ChangeCellDefence(CellDefence.Tree);
         }
         else if (Celldefence == CellDefence.Wall)
         {
-            Wall.SetActive(true);
-            Tree.SetActive(false);
-            LeakyDam.SetActive(false);
-            BetterDam.SetActive(false);
-            ResistanceAmount = 1.5f;
-            MaximumWaterLevel = ResistanceAmount;
+
+            ChangeCellDefence(CellDefence.Wall);
 
 
         }
         else if (Celldefence == CellDefence.LeakyDam)
         {
-            Wall.SetActive(false);
-            Tree.SetActive(false);
-            LeakyDam.SetActive(true);
-            BetterDam.SetActive(false);
-            ResistanceAmount = 2.0f;
-            MaximumWaterLevel = ResistanceAmount;
+
+            ChangeCellDefence(CellDefence.LeakyDam);
 
         }
         else if (Celldefence == CellDefence.BetterDam)
         {
-            Wall.SetActive(false);
-            Tree.SetActive(false);
-            LeakyDam.SetActive(false);
-            BetterDam.SetActive(true);
-            ResistanceAmount = 3.0f;
-            MaximumWaterLevel = ResistanceAmount;
+
+            ChangeCellDefence(CellDefence.BetterDam);
 
         }
 
     }
 
+    public void ChangeCellDefence(CellDefence cellDefence)
+    {
+        switch (cellDefence)
+        {
+            case CellDefence.Tree:
+                Wall.SetActive(false);
+                Tree.SetActive(true);
+                LeakyDam.SetActive(false);
+                BetterDam.SetActive(false);
+                ResistanceAmount = 1.5f;
+                MaximumWaterLevel = ResistanceAmount;
+                break;
+
+            case CellDefence.Wall:
+                Wall.SetActive(true);
+                Tree.SetActive(false);
+                LeakyDam.SetActive(false);
+                BetterDam.SetActive(false);
+                ResistanceAmount = 1.5f;
+                MaximumWaterLevel = ResistanceAmount;
+                break;
+            case CellDefence.LeakyDam:
+                Wall.SetActive(false);
+                Tree.SetActive(false);
+                LeakyDam.SetActive(true);
+                BetterDam.SetActive(false);
+                ResistanceAmount = 2.0f;
+                MaximumWaterLevel = ResistanceAmount;
+                break;
+            case CellDefence.BetterDam:
+                Wall.SetActive(false);
+                Tree.SetActive(false);
+                LeakyDam.SetActive(false);
+                BetterDam.SetActive(true);
+                ResistanceAmount = 3.0f;
+                MaximumWaterLevel = ResistanceAmount;
+                break;
+        }
+
+    }
     public void InitUrbanArea()
     {
         if(Cellspace == CellSpace.Taken)
@@ -250,17 +299,9 @@ public class Cell : MonoBehaviour
         
         for (int i = 0; i < World.cellObject.Count; i++)
         {
-            ////neighbours = new List<GameObject>();
-            //if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 &&
-            //    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
-            //{
-            //    // Down Neighbour
-            //    //neighbours.Add(World.cellObject[i].gameObject);
-            //    hasBottomNeighbour = true;
 
-            //}
 
-            if (Cell_Y_ID == 0 || Cell_Y_ID == -1)
+            if (Cell_Y_ID == -1)
             {
                 if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID - 1 && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID &&
                     World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
@@ -295,42 +336,18 @@ public class Cell : MonoBehaviour
                 if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 &&
                     World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID + 1)
                 {
-                    // Down Forward Neighbour
-                    ForwardNeighbour = World.cellObject[i].gameObject;
+
                     neighbours.Add(World.cellObject[i].gameObject);
                 }
 
                 if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 &&
                     World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID - 1)
                 {
-                    // Down Back Neighbour
-                    BackNeighbour = World.cellObject[i].gameObject;
+
                     neighbours.Add(World.cellObject[i].gameObject);
 
                 }
             }
-
-            
-
-
-
-            //// Do we need the UP neighbour
-            //if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID + 1 && 
-            //    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
-            //{
-            //    // Up Neighbour
-            //    neighbours.Add(World.cellObject[i].gameObject);
-            //}
-
-            //if (World.cellObject[i].GetComponent<Cell>().Cell_X_ID == this.Cell_X_ID && World.cellObject[i].GetComponent<Cell>().Cell_Y_ID == this.Cell_Y_ID - 1 && 
-            //    World.cellObject[i].GetComponent<Cell>().Cell_Z_ID == this.Cell_Z_ID)
-            //{
-            //    // Down Neighbour
-            //    neighbours.Add(World.cellObject[i].gameObject);
-            //}
-
-
-
 
         }
     }

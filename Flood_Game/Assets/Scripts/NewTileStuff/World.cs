@@ -6,6 +6,7 @@ public class World : MonoBehaviour
 {
     public enum Phase
     {
+        Pause,
         Build,
         Simulation,
     }
@@ -17,6 +18,8 @@ public class World : MonoBehaviour
     {
         phase = Phase.Build;
     }
+
+    // make it cells
     public List<GameObject> cellObject = new List<GameObject>();
     
     void Awake()
@@ -27,6 +30,8 @@ public class World : MonoBehaviour
 
             for (int i = 0; i < cellObject.Count; i++)
             {
+                // Array of ints for the ID'S
+                // expensive
                 cell.GetComponent<Cell>().Cell_X_ID = (int)cell.transform.position.x;
                 cell.GetComponent<Cell>().Cell_Z_ID = (int)cell.transform.position.z;      
                 cell.GetComponent<Cell>().Cell_Y_ID = (int)cell.transform.parent.parent.gameObject.transform.position.y;

@@ -742,6 +742,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MudBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 47d4f50ef35f23747b8cd61ff4d2168e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 47d4f50ef35f23747b8cd61ff4d2168e, type: 3}
+      propertyPath: m_TagString
+      value: Cell
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 47d4f50ef35f23747b8cd61ff4d2168e, type: 3}
@@ -773,7 +781,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 47d4f50ef35f23747b8cd61ff4d2168e, type: 3}
   m_PrefabInstance: {fileID: 2796670760655071666}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4762935622154150835
+--- !u!65 &1126159007482381752
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3030549731808646371}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3564904464769076782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -785,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0af1e3acd49cb0409fce5816ed3a643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pervWaterLevel: 0
   CurrentWaterLevel: 0
   MaximumWaterLevel: 1
   ExceedingAmount: 0
@@ -807,12 +829,6 @@ MonoBehaviour:
   Cell_X_ID: 0
   Cell_Y_ID: 0
   Cell_Z_ID: 0
-  UpNeighbour: {fileID: 0}
-  DownNeighbour: {fileID: 0}
-  ForwardNeighbour: {fileID: 0}
-  BackNeighbour: {fileID: 0}
-  LeftNeighbour: {fileID: 0}
-  RightNeighbour: {fileID: 0}
   neighbours: []
   World: {fileID: 0}
   selectedCell: {fileID: 0}
