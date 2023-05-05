@@ -110,7 +110,7 @@ public class Cell : MonoBehaviour
         }
 
         // Spawn in urban areas
-        InitUrbanArea();
+        //InitUrbanArea();
 
         // Find the neighbour cells and add them to the list
         AddNeighbourCells();
