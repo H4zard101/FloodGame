@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CloudManager : MonoBehaviour
 {
     public World world;
     public GameTimeManager gameTime;
+
+    public GameObject SimulateButton;
+    public GameObject PauseButton;
+
+    public TextMeshProUGUI phaseText;
+   
+
 
     [SerializeField]private List<GameObject> cloudList = new List<GameObject>();
 
@@ -49,7 +57,9 @@ public class CloudManager : MonoBehaviour
 
                 this.gameObject.transform.Translate(0, 0, (float)(- 0.1 * gameTime.gameTimeSlider.value * Time.deltaTime));
             }
-
+            phaseText.text = "Current Phase : Simulation";
+            SimulateButton.SetActive(false);
+            PauseButton.SetActive(true);
         }
 
         else if(world.phase == World.Phase.Pause)
@@ -61,6 +71,9 @@ public class CloudManager : MonoBehaviour
                 // Pause the particles
                 cloudList[i].GetComponentInChildren<ParticleSystem>().Pause();
             }
+            phaseText.text = "Current Phase : Paused";
+            SimulateButton.SetActive(true);
+            PauseButton.SetActive(false);
         }
 
         else if(world.phase == World.Phase.Build)
@@ -77,16 +90,19 @@ public class CloudManager : MonoBehaviour
 
                 // Set active
                 cloudList[i].gameObject.SetActive(false);
+                SimulateButton.SetActive(true);
+                PauseButton.SetActive(false);
             }
+            phaseText.text = "Current Phase : Build";
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if(other.tag == "CloudEndPoint")
-        {
-            Debug.Log("Hello");
+        {            
             world.phase = World.Phase.Build;
+
         }
     }
 }

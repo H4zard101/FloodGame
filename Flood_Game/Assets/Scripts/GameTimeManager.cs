@@ -13,9 +13,6 @@ public class GameTimeManager : MonoBehaviour
     public TextMeshProUGUI buttonText;
     public TextMeshProUGUI phaseText;
 
-    public GameObject stopButton;
-    public GameObject startButton;
-    public GameObject pausedMenuPanelUi;
 
     public World world;
 
@@ -31,20 +28,15 @@ public class GameTimeManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        stopButton.SetActive(true);
-        startButton.SetActive(false);
+
         isGamePaused = false;
-        pausedMenuPanelUi.SetActive(false);
-        phaseText.text = "Current Phase : Simulation";
+
         world.phase = World.Phase.Simulation;
     }
     public void PauseGame()
     {
-        stopButton.SetActive(false);
-        startButton.SetActive(true);
+
         isGamePaused = true;
-        pausedMenuPanelUi.SetActive(true);
-        phaseText.text = "Current Phase : Simulation";
         world.phase = World.Phase.Pause;
     }
 }
