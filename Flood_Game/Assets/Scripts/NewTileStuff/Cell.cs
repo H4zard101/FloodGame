@@ -75,6 +75,7 @@ public class Cell : MonoBehaviour
 
     public World World;
     public SelectedCell selectedCell;
+    public UrbanAreas urbanAreas;
     public void Start()
     {
 
@@ -125,6 +126,12 @@ public class Cell : MonoBehaviour
         if (CurrentWaterLevel >= MaximumWaterLevel)
         {
             AffectNeighbours();
+            if(Cellspace == CellSpace.Taken)
+            {
+                urbanAreas = GetComponentInChildren<UrbanAreas>();
+                urbanAreas.isFlooding = true;
+            }
+
         }
     }
 
