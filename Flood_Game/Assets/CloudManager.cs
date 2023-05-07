@@ -94,6 +94,7 @@ public class CloudManager : MonoBehaviour
                 PauseButton.SetActive(false);
             }
             phaseText.text = "Current Phase : Build";
+
         }
     }
 
@@ -102,7 +103,8 @@ public class CloudManager : MonoBehaviour
         if(other.tag == "CloudEndPoint")
         {            
             world.phase = World.Phase.Build;
-
+            world.iterations = world.iterations + 1;
+            Debug.Log(world.iterations.ToString());
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class World : MonoBehaviour
 
     public Phase phase;
 
+    public int iterations = 0;
 
     public void Start()
     {
@@ -39,6 +41,14 @@ public class World : MonoBehaviour
             }
         }
 
+    }
+
+    public void Update()
+    {
+        if (iterations == 2)
+        {
+            SceneManager.LoadScene("Results");
+        }
     }
 
 }

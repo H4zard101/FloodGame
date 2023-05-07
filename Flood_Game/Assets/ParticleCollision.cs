@@ -7,7 +7,7 @@ public class ParticleCollision : MonoBehaviour
     public void OnParticleCollision(GameObject other)
     {
         
-        other.GetComponent<Cell>().CurrentWaterLevel += 0.05F;
+        other.GetComponent<Cell>().CurrentWaterLevel += 0.005F;
     }
 
 }
