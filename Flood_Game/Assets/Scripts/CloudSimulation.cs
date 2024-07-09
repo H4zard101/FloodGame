@@ -456,6 +456,8 @@ public class CloudSimulation : MonoBehaviour
     public ParticleSystem particleSystemFive;
     public Button stopButton;
     public Button startButton;
+    public World world;
+
 
     private Coroutine movementCoroutine;
     private ParticleSystem[] allParticleSystems;
@@ -464,6 +466,12 @@ public class CloudSimulation : MonoBehaviour
     {
         startPosition = GameObject.Find("CloudSimulationStart").transform.position;
         endPosition = GameObject.Find("CloudSimulationEnd").transform.position;
+
+        // Find the World object in the scene and assign it to the world variable
+        world = GameObject.FindObjectOfType<World>();
+
+        // Set the phase of the World script to Build
+        world.phase = World.Phase.Build;
 
         // Set the initial position of the cloud to the start position
         transform.position = startPosition;
